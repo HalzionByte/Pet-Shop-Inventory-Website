@@ -41,8 +41,8 @@ export default function PetCard({ pet, categories }: Props) {
     <motion.div
       whileHover={{ y: -4, boxShadow: '0 12px 32px rgba(91,61,30,0.15)' }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="bg-bg-card rounded-3xl overflow-hidden shadow-md border border-border-main flex flex-col">
-      <div className="relative overflow-hidden h-52 bg-bg-card-alt">
+      className="relative z-10 flex flex-col overflow-visible rounded-3xl border border-[#F0E0C7] bg-[#FFFDF9] shadow-md">
+      <div className="relative h-52 overflow-hidden rounded-t-3xl bg-[#FDF3E7]">
         <PetImage
           src={pet.images[0]}
           alt={pet.name}
@@ -58,7 +58,7 @@ export default function PetCard({ pet, categories }: Props) {
         )}
       </div>
 
-      <div className="p-4 flex flex-col flex-1 gap-3">
+      <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
           <h3 className="font-display text-lg font-semibold text-text-main">{pet.name}</h3>
           <p className="text-sm text-text-muted">{pet.species} · {pet.breed}</p>
@@ -70,13 +70,13 @@ export default function PetCard({ pet, categories }: Props) {
           </span>
         )}
 
-        <div className="flex gap-2 mt-auto pt-1">
+        <div className="mt-auto flex gap-2 pt-1">
           <Link to={`/pets/${pet.id}`}
-            className="flex-1 text-center py-2 rounded-xl bg-brand-gold text-white text-sm font-semibold hover:bg-brand-gold-hover transition-colors">
+            className="flex-1 rounded-xl bg-[#F4A261] px-3 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-[#E07832]">
             Meet Me 🐾
           </Link>
           <a href={waLink} target="_blank" rel="noopener noreferrer"
-            className="px-3 py-2 rounded-xl bg-brand-green text-white text-sm font-semibold hover:bg-brand-green-hover transition-colors">
+            className="rounded-xl bg-[#7BC67E] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#4A9B5F]">
             💬
           </a>
         </div>
