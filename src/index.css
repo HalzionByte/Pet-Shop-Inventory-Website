@@ -18,6 +18,23 @@
   --color-pink: #FFB5C8;
   --color-pink-light: #FFE0E9;
   --color-yellow: #FFD166;
+  --color-bg-main: #FFF8F0;
+  --color-bg-card: #FFFDF9;
+  --color-bg-card-alt: #FDF3E7;
+  --color-border-main: #F0E0C7;
+  --color-text-main: #5C3D1E;
+  --color-text-muted: #8B5E3C;
+  --color-text-subtle: #A67C57;
+  --color-brand-gold: #F4A261;
+  --color-brand-gold-hover: #E07832;
+  --color-brand-green: #7BC67E;
+  --color-brand-green-hover: #4A9B5F;
+  --color-badge-avail-bg: #E8F6EA;
+  --color-badge-avail-text: #4A9B5F;
+  --color-badge-res-bg: #FFF4D9;
+  --color-badge-res-text: #B8860B;
+  --color-badge-sold-bg: #FDECEC;
+  --color-badge-sold-text: #C0392B;
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Nunito', system-ui, sans-serif;
 }

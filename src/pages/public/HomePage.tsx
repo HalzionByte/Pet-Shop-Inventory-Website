@@ -23,14 +23,14 @@ export default function HomePage() {
       <HeroCarousel images={carousel} />
 
       {/* Featured Pets */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="mx-auto max-w-6xl px-4 py-16">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.08 } } }}>
-          <motion.div variants={fadeUp} className="text-center mb-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-text-main mb-2">
+          <motion.div variants={fadeUp} className="mb-10 text-center">
+            <h2 className="mb-2 font-display text-3xl font-bold text-[#5C3D1E] md:text-4xl">
               Meet Our Featured Pets
             </h2>
-            <p className="text-text-muted text-base">These adorable friends are looking for their forever homes</p>
+            <p className="text-base text-[#8B5E3C]">These adorable friends are looking for their forever homes</p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -42,12 +42,12 @@ export default function HomePage() {
           </div>
 
           {featured.length === 0 && (
-            <p className="text-center text-text-muted py-12">No featured pets right now. Check back soon!</p>
+            <p className="py-12 text-center text-[#8B5E3C]">No featured pets right now. Check back soon!</p>
           )}
 
-          <motion.div variants={fadeUp} className="text-center mt-10">
+          <motion.div variants={fadeUp} className="mt-10 text-center">
             <Link to="/pets"
-              className="inline-block px-8 py-3.5 bg-text-main text-white font-bold rounded-full hover:bg-text-main transition-colors">
+              className="inline-block rounded-full bg-[#5C3D1E] px-8 py-3.5 font-bold text-white transition-colors hover:bg-[#4A2D14]">
               See All Pets →
             </Link>
           </motion.div>
@@ -55,22 +55,22 @@ export default function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="bg-bg-card-alt py-16">
-        <div className="max-w-6xl mx-auto px-4">
+      <section className="bg-[#FDF3E7] py-16">
+        <div className="mx-auto max-w-6xl px-4">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
             variants={{ show: { transition: { staggerChildren: 0.06 } } }}>
-            <motion.div variants={fadeUp} className="text-center mb-10">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-text-main mb-2">Browse by Category</h2>
-              <p className="text-text-muted">Find the perfect pet for your lifestyle</p>
+            <motion.div variants={fadeUp} className="mb-10 text-center">
+              <h2 className="mb-2 font-display text-3xl font-bold text-[#5C3D1E] md:text-4xl">Browse by Category</h2>
+              <p className="text-[#8B5E3C]">Find the perfect pet for your lifestyle</p>
             </motion.div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {categories.map(cat => (
                 <motion.div key={cat.id} variants={fadeUp}>
                   <Link to={`/pets?category=${cat.id}`}
-                    className="flex flex-col items-center gap-2 p-5 bg-bg-card rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all border border-border-main">
+                    className="flex flex-col items-center gap-2 rounded-2xl border border-[#F0E0C7] bg-[#FFFDF9] p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
                     <span className="text-4xl">{cat.emoji}</span>
-                    <span className="font-semibold text-text-main text-sm">{cat.name}</span>
-                    <span className="text-xs text-text-muted">
+                    <span className="text-sm font-semibold text-[#5C3D1E]">{cat.name}</span>
+                    <span className="text-xs text-[#8B5E3C]">
                       {pets.filter(p => p.category_id === cat.id && p.availability !== 'sold').length} available
                     </span>
                   </Link>
