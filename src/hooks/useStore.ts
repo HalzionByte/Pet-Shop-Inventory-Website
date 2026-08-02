@@ -78,16 +78,30 @@ function objToArray<T>(val: unknown): T[] {
 // ─── Pets ─────────────────────────────────────────────────────────────────────
 
 export function usePets() {
-  const [pets, setPets] = useState<Pet[]>([]);
+  const [pets, setPets] = useState<Pet[]>(seedPets);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+    let hasReceivedFirstValue = false;
     const petsRef = ref(db, 'pets');
     const unsub = onValue(petsRef, snap => {
-      setPets(objToArray<Pet>(snap.val()));
+      const next = objToArray<Pet>(snap.val());
+      if (!active) return;
+
+      if (!hasReceivedFirstValue) {
+        setPets(next.length > 0 ? next : seedPets);
+        hasReceivedFirstValue = true;
+      } else {
+        setPets(next);
+      }
       setLoading(false);
     });
-    return unsub;
+
+    return () => {
+      active = false;
+      unsub();
+    };
   }, []);
 
   const addPet = async (pet: Omit<Pet, 'id' | 'created_at' | 'updated_at'>) => {
@@ -111,16 +125,30 @@ export function usePets() {
 // ─── Categories ───────────────────────────────────────────────────────────────
 
 export function useCategories() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>(seedCategories);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+    let hasReceivedFirstValue = false;
     const catRef = ref(db, 'categories');
     const unsub = onValue(catRef, snap => {
-      setCategories(objToArray<Category>(snap.val()));
+      const next = objToArray<Category>(snap.val());
+      if (!active) return;
+
+      if (!hasReceivedFirstValue) {
+        setCategories(next.length > 0 ? next : seedCategories);
+        hasReceivedFirstValue = true;
+      } else {
+        setCategories(next);
+      }
       setLoading(false);
     });
-    return unsub;
+
+    return () => {
+      active = false;
+      unsub();
+    };
   }, []);
 
   const addCategory = async (name: string, emoji: string) => {
@@ -160,17 +188,31 @@ export function useCategories() {
 // ─── Carousel ─────────────────────────────────────────────────────────────────
 
 export function useCarousel() {
-  const [carousel, setCarousel] = useState<CarouselImage[]>([]);
+  const [carousel, setCarousel] = useState<CarouselImage[]>(seedCarousel);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+    let hasReceivedFirstValue = false;
     const carRef = ref(db, 'carousel');
     const unsub = onValue(carRef, snap => {
-      const arr = objToArray<CarouselImage>(snap.val());
-      setCarousel([...arr].sort((a, b) => a.display_order - b.display_order));
+      const next = objToArray<CarouselImage>(snap.val());
+      if (!active) return;
+
+      const sorted = [...next].sort((a, b) => a.display_order - b.display_order);
+      if (!hasReceivedFirstValue) {
+        setCarousel(sorted.length > 0 ? sorted : seedCarousel);
+        hasReceivedFirstValue = true;
+      } else {
+        setCarousel(sorted);
+      }
       setLoading(false);
     });
-    return unsub;
+
+    return () => {
+      active = false;
+      unsub();
+    };
   }, []);
 
   const addImage = async (image: Omit<CarouselImage, 'id' | 'display_order'>) => {
@@ -205,13 +247,26 @@ export function useSettings() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+    let hasReceivedFirstValue = false;
     const settRef = ref(db, 'settings');
     const unsub = onValue(settRef, snap => {
       const val = snap.val();
-      if (val) setSettings(val as SiteSettings);
+      if (!active) return;
+
+      if (!hasReceivedFirstValue) {
+        setSettings((val || seedSettings) as SiteSettings);
+        hasReceivedFirstValue = true;
+      } else if (val) {
+        setSettings(val as SiteSettings);
+      }
       setLoading(false);
     });
-    return unsub;
+
+    return () => {
+      active = false;
+      unsub();
+    };
   }, []);
 
   const updateSettings = async (data: Partial<SiteSettings>) => {
