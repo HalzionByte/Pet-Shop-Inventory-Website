@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSettings } from '../../hooks/useStore';
@@ -7,20 +7,6 @@ export default function Navbar() {
   const { settings } = useSettings();
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const [isDark, setIsDark] = useState(() => {
-    return localStorage.getItem('theme') === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  });
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
 
   const links = [
     { to: '/', label: 'Home' },
@@ -30,15 +16,10 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-bg-main/95 backdrop-blur border-b border-border-main">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <button onClick={() => setIsDark(!isDark)} className="p-2 rounded-full bg-bg-card-alt text-text-main hover:bg-border-main transition-colors flex-shrink-0" aria-label="Toggle Dark Mode">
-            {isDark ? '🌙' : '☀️'}
-          </button>
-          <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-text-main">
-            <img src="/icon.jpg" alt="Store Logo" className="w-8 h-8 rounded-full object-cover shadow-sm bg-bg-card" />
-            <span className="hidden sm:inline">{settings.shop_name}</span>
-          </Link>
-        </div>
+        <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-text-main">
+          <img src="/icon.jpg" alt="Store Logo" className="w-8 h-8 rounded-full object-cover shadow-sm bg-bg-card" />
+          {settings.shop_name}
+        </Link>
 
         <div className="flex items-center gap-4">
           {/* Desktop nav */}

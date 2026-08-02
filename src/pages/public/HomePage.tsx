@@ -10,7 +10,7 @@ const fadeUp = {
 };
 
 export default function HomePage() {
-  const { pets, loading: petsLoading } = usePets();
+  const { pets } = usePets();
   const { categories } = useCategories();
   const { carousel } = useCarousel();
   const { settings } = useSettings();
@@ -33,21 +33,15 @@ export default function HomePage() {
             <p className="text-text-muted text-base">These adorable friends are looking for their forever homes</p>
           </motion.div>
 
-          {petsLoading ? (
-            <div className="flex justify-center py-12 text-4xl animate-bounce">
-              🐾
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featured.map(pet => (
-                <motion.div key={pet.id} variants={fadeUp}>
-                  <PetCard pet={pet} categories={categories} />
-                </motion.div>
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featured.map(pet => (
+              <motion.div key={pet.id} variants={fadeUp}>
+                <PetCard pet={pet} categories={categories} />
+              </motion.div>
+            ))}
+          </div>
 
-          {!petsLoading && featured.length === 0 && (
+          {featured.length === 0 && (
             <p className="text-center text-text-muted py-12">No featured pets right now. Check back soon!</p>
           )}
 
