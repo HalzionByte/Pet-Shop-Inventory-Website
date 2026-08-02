@@ -34,21 +34,21 @@ export default function AdminCarouselPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-display text-2xl font-bold text-[#3D2B1F] mb-6">Homepage Carousel</h1>
+      <h1 className="font-display text-2xl font-bold text-text-main mb-6">Homepage Carousel</h1>
 
       {/* Add/Edit form */}
-      <div className="bg-white rounded-2xl border border-[#F5ECD8] p-5 mb-6">
-        <h2 className="font-semibold text-[#3D2B1F] mb-4">{editId ? 'Edit Slide' : 'Add Slide'}</h2>
+      <div className="bg-bg-card rounded-2xl border border-border-main p-5 mb-6">
+        <h2 className="font-semibold text-text-main mb-4">{editId ? 'Edit Slide' : 'Add Slide'}</h2>
         <div className="flex flex-col gap-3">
           {/* Image input — URL or file upload */}
           {editId ? (
             <div className="flex flex-col gap-2">
               {imageSrc && (
-                <div className="rounded-xl overflow-hidden h-32 bg-[#F5ECD8]">
+                <div className="rounded-xl overflow-hidden h-32 bg-bg-card-alt">
                   <img src={imageSrc} alt="preview" className="w-full h-full object-cover" />
                 </div>
               )}
-              <p className="text-xs text-[#8B5E3C] font-medium">Replace image (optional):</p>
+              <p className="text-xs text-text-muted font-medium">Replace image (optional):</p>
               <ImageInput
                 onConfirm={(src) => setImageSrc(src)}
                 placeholder="https://…"
@@ -66,11 +66,11 @@ export default function AdminCarouselPage() {
             {editId && (
               <>
                 <button onClick={() => handleSave()}
-                  className="px-5 py-2.5 bg-[#F4A261] text-white font-bold rounded-xl hover:bg-[#E07832] transition-colors text-sm">
+                  className="px-5 py-2.5 bg-brand-gold text-white font-bold rounded-xl hover:bg-brand-gold-hover transition-colors text-sm">
                   Save Changes
                 </button>
                 <button onClick={() => { setEditId(null); setImageSrc(''); setTitle(''); setSubtitle(''); }}
-                  className="px-4 py-2.5 border border-[#F5ECD8] text-[#8B5E3C] font-semibold rounded-xl hover:bg-[#F5ECD8] transition-colors text-sm">
+                  className="px-4 py-2.5 border border-border-main text-text-muted font-semibold rounded-xl hover:bg-bg-card-alt transition-colors text-sm">
                   Cancel
                 </button>
               </>
@@ -80,29 +80,29 @@ export default function AdminCarouselPage() {
       </div>
 
       {/* Reorderable list */}
-      <div className="bg-white rounded-2xl border border-[#F5ECD8] overflow-hidden">
-        <div className="px-4 py-3 border-b border-[#F5ECD8] text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">
+      <div className="bg-bg-card rounded-2xl border border-border-main overflow-hidden">
+        <div className="px-4 py-3 border-b border-border-main text-xs font-bold text-text-muted uppercase tracking-wider">
           Drag to reorder · {sorted.length} slides
         </div>
-        <Reorder.Group axis="y" values={sorted} onReorder={handleReorder} className="divide-y divide-[#F5ECD8]">
+        <Reorder.Group axis="y" values={sorted} onReorder={handleReorder} className="divide-y divide-border-main">
           {sorted.map(item => (
-            <Reorder.Item key={item.id} value={item} className="flex items-center gap-3 p-3 hover:bg-[#FFF8F0] cursor-grab active:cursor-grabbing">
-              <span className="text-[#C49A6C] select-none">⠿</span>
-              <div className="w-16 h-12 rounded-xl overflow-hidden bg-[#F5ECD8] flex-shrink-0">
+            <Reorder.Item key={item.id} value={item} className="flex items-center gap-3 p-3 hover:bg-bg-main cursor-grab active:cursor-grabbing">
+              <span className="text-text-subtle select-none">⠿</span>
+              <div className="w-16 h-12 rounded-xl overflow-hidden bg-bg-card-alt flex-shrink-0">
                 <img src={item.image_url} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-[#3D2B1F] text-sm truncate">{item.title || 'Untitled Slide'}</p>
-                <p className="text-xs text-[#8B5E3C] truncate">{item.subtitle}</p>
+                <p className="font-semibold text-text-main text-sm truncate">{item.title || 'Untitled Slide'}</p>
+                <p className="text-xs text-text-muted truncate">{item.subtitle}</p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <button onClick={() => updateImage(item.id, { enabled: !item.enabled })}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                    item.enabled ? 'bg-[#B8E4BA] text-[#2D6A35]' : 'bg-[#F5ECD8] text-[#8B5E3C]'}`}>
+                    item.enabled ? 'bg-badge-avail-bg text-badge-avail-text' : 'bg-bg-card-alt text-text-muted'}`}>
                   {item.enabled ? 'On' : 'Off'}
                 </button>
                 <button onClick={() => startEdit(item)}
-                  className="px-3 py-1.5 text-xs font-semibold text-[#5C3D1E] hover:bg-[#F5ECD8] rounded-lg transition-colors">
+                  className="px-3 py-1.5 text-xs font-semibold text-text-main hover:bg-bg-card-alt rounded-lg transition-colors">
                   Edit
                 </button>
                 <button onClick={() => { if (confirm('Delete this slide?')) deleteImage(item.id); }}
@@ -114,11 +114,11 @@ export default function AdminCarouselPage() {
           ))}
         </Reorder.Group>
         {sorted.length === 0 && (
-          <p className="text-center py-8 text-[#8B5E3C] text-sm">No carousel images yet.</p>
+          <p className="text-center py-8 text-text-muted text-sm">No carousel images yet.</p>
         )}
       </div>
     </div>
   );
 }
 
-const inp = 'w-full px-4 py-2.5 rounded-xl border border-[#F5ECD8] text-sm text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50 bg-white';
+const inp = 'w-full px-4 py-2.5 rounded-xl border border-border-main text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-brand-gold/50 bg-bg-card';

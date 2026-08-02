@@ -37,8 +37,8 @@ export default function BrowsePage() {
     <div className="max-w-6xl mx-auto px-4 py-10">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
         <div className="mb-8">
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-[#3D2B1F] mb-1">Browse All Pets</h1>
-          <p className="text-[#8B5E3C]">{filtered.length} adorable friends waiting to meet you 🐾</p>
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-text-main mb-1">Browse All Pets</h1>
+          <p className="text-text-muted">{filtered.length} adorable friends waiting to meet you 🐾</p>
         </div>
 
         {/* Filters */}
@@ -48,13 +48,13 @@ export default function BrowsePage() {
             placeholder="Search by name, species, breed…"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="flex-1 min-w-52 px-4 py-2.5 rounded-xl border border-[#F5ECD8] bg-white text-sm text-[#3D2B1F] placeholder:text-[#C49A6C] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50"
+            className="flex-1 min-w-52 px-4 py-2.5 rounded-xl border border-border-main bg-bg-card text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
           />
 
           <select
             value={selectedCategory}
             onChange={e => handleCategoryChange(e.target.value)}
-            className="px-4 py-2.5 rounded-xl border border-[#F5ECD8] bg-white text-sm text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50">
+            className="px-4 py-2.5 rounded-xl border border-border-main bg-bg-card text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-brand-gold/50">
             <option value="">All Categories</option>
             {categories.map(c => (
               <option key={c.id} value={c.id}>{c.emoji} {c.name}</option>
@@ -64,7 +64,7 @@ export default function BrowsePage() {
           <select
             value={selectedAvailability}
             onChange={e => setSelectedAvailability(e.target.value as Availability | '')}
-            className="px-4 py-2.5 rounded-xl border border-[#F5ECD8] bg-white text-sm text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50">
+            className="px-4 py-2.5 rounded-xl border border-border-main bg-bg-card text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-brand-gold/50">
             <option value="">All Availability</option>
             <option value="available">✅ Available</option>
             <option value="reserved">🟡 Reserved</option>
@@ -73,7 +73,7 @@ export default function BrowsePage() {
 
           {(search || selectedCategory || selectedAvailability) && (
             <button onClick={() => { setSearch(''); handleCategoryChange(''); setSelectedAvailability(''); }}
-              className="px-4 py-2.5 rounded-xl border border-[#F5ECD8] bg-white text-sm text-[#8B5E3C] hover:bg-[#F5ECD8] transition-colors">
+              className="px-4 py-2.5 rounded-xl border border-border-main bg-bg-card text-sm text-text-muted hover:bg-bg-card-alt transition-colors">
               Clear ✕
             </button>
           )}
@@ -95,8 +95,8 @@ export default function BrowsePage() {
         ) : (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">🐾</div>
-            <h3 className="font-display text-xl font-semibold text-[#3D2B1F] mb-2">No pets found</h3>
-            <p className="text-[#8B5E3C]">Try adjusting your search or filters</p>
+            <h3 className="font-display text-xl font-semibold text-text-main mb-2">No pets found</h3>
+            <p className="text-text-muted">Try adjusting your search or filters</p>
           </div>
         )}
       </motion.div>

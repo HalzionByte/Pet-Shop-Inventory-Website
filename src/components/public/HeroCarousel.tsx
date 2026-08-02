@@ -20,8 +20,8 @@ export default function HeroCarousel({ images }: Props) {
 
   if (!enabled.length) {
     return (
-      <div className="relative h-[500px] md:h-[600px] bg-[#F5ECD8] flex items-center justify-center rounded-3xl overflow-hidden mx-4 my-4">
-        <p className="text-[#8B5E3C] font-display text-2xl">Welcome to Our Pet Shop 🐾</p>
+      <div className="relative h-[500px] md:h-[600px] bg-bg-card-alt flex items-center justify-center rounded-3xl overflow-hidden mx-4 my-4">
+        <p className="text-text-muted font-display text-2xl">Welcome to Our Pet Shop 🐾</p>
       </div>
     );
   }
@@ -52,7 +52,7 @@ export default function HeroCarousel({ images }: Props) {
           </h1>
           <p className="text-white/90 text-base md:text-lg mb-6 max-w-xl mx-auto">{slide.subtitle}</p>
           <Link to="/pets"
-            className="inline-block px-8 py-3.5 bg-[#F4A261] hover:bg-[#E07832] text-white font-bold rounded-full text-base transition-colors shadow-lg">
+            className="inline-block px-8 py-3.5 bg-brand-gold hover:bg-brand-gold-hover text-white font-bold rounded-full text-base transition-colors shadow-lg">
             Browse Our Pets 🐾
           </Link>
         </motion.div>
@@ -62,11 +62,11 @@ export default function HeroCarousel({ images }: Props) {
       {enabled.length > 1 && (
         <>
           <button onClick={prev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white flex items-center justify-center text-lg transition-colors">
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-bg-card/20 hover:bg-bg-card/40 backdrop-blur text-white flex items-center justify-center text-lg transition-colors">
             ‹
           </button>
           <button onClick={next}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white flex items-center justify-center text-lg transition-colors">
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-bg-card/20 hover:bg-bg-card/40 backdrop-blur text-white flex items-center justify-center text-lg transition-colors">
             ›
           </button>
         </>
@@ -76,7 +76,7 @@ export default function HeroCarousel({ images }: Props) {
       <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2">
         {enabled.map((_, i) => (
           <button key={i} onClick={() => setIndex(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${i === index ? 'bg-white scale-125' : 'bg-white/50'}`} />
+            className={`w-2.5 h-2.5 rounded-full transition-all ${i === index ? 'bg-bg-card scale-125' : 'bg-bg-card/50'}`} />
         ))}
       </div>
     </div>

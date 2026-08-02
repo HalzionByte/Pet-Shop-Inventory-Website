@@ -2,24 +2,77 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-cream: #FFF8F0;
-  --color-cream-dark: #F5ECD8;
-  --color-brown: #8B5E3C;
-  --color-brown-light: #C49A6C;
-  --color-brown-dark: #5C3D1E;
-  --color-green: #7BC67E;
-  --color-green-light: #B8E4BA;
-  --color-green-dark: #4A9B5F;
-  --color-orange: #F4A261;
-  --color-orange-light: #FDDCB8;
-  --color-orange-dark: #E07832;
-  --color-blue: #A8DADC;
-  --color-blue-light: #D6F0F1;
-  --color-pink: #FFB5C8;
-  --color-pink-light: #FFE0E9;
-  --color-yellow: #FFD166;
+  --color-bg-main: var(--bg-main);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-alt: var(--bg-card-alt);
+  --color-border-main: var(--border-main);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
+  
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-hover: var(--brand-gold-hover);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-hover: var(--brand-green-hover);
+  --color-brand-blue: var(--brand-blue);
+  
+  --color-badge-avail-bg: var(--badge-avail-bg);
+  --color-badge-avail-text: var(--badge-avail-text);
+  --color-badge-res-bg: var(--badge-res-bg);
+  --color-badge-res-text: var(--badge-res-text);
+  --color-badge-sold-bg: var(--badge-sold-bg);
+  --color-badge-sold-text: var(--badge-sold-text);
+
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Nunito', system-ui, sans-serif;
+}
+
+:root {
+  /* Light Mode (Original Theme) */
+  --bg-main: #FFF8F0;
+  --bg-card: #FFFFFF;
+  --bg-card-alt: #F5ECD8;
+  --border-main: #F5ECD8;
+  --text-main: #3D2B1F;
+  --text-muted: #8B5E3C;
+  --text-subtle: #C49A6C;
+  
+  --brand-gold: #F4A261;
+  --brand-gold-hover: #E07832;
+  --brand-green: #7BC67E;
+  --brand-green-hover: #4A9B5F;
+  --brand-blue: #A8DADC;
+  
+  --badge-avail-bg: #B8E4BA;
+  --badge-avail-text: #2D6A35;
+  --badge-res-bg: #FFE0A0;
+  --badge-res-text: #8B5E00;
+  --badge-sold-bg: #FFD1D1;
+  --badge-sold-text: #8B2020;
+}
+
+html.dark {
+  /* Dark Mode (Pisind Pet Store Theme) */
+  --bg-main: #1A1A1A;
+  --bg-card: #242424;
+  --bg-card-alt: #111111;
+  --border-main: #2E2E2E;
+  --text-main: #FFFFFF;
+  --text-muted: #B0B0B0;
+  --text-subtle: #888888;
+  
+  --brand-gold: #F9B72A;
+  --brand-gold-hover: #E09A1A;
+  --brand-green: #66B032;
+  --brand-green-hover: #4A8A22;
+  --brand-blue: #8AA8F3;
+  
+  --badge-avail-bg: #1A3A0A;
+  --badge-avail-text: #66B032;
+  --badge-res-bg: #3A2A00;
+  --badge-res-text: #F9B72A;
+  --badge-sold-bg: #3A0A0A;
+  --badge-sold-text: #FF6B6B;
 }
 
 * {
@@ -29,8 +82,8 @@
 
 body {
   font-family: var(--font-body);
-  background-color: #FFF8F0;
-  color: #3D2B1F;
+  background-color: var(--bg-main);
+  color: var(--text-main);
 }
 
 .font-display {

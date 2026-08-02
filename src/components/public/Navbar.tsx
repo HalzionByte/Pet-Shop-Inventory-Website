@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSettings } from '../../hooks/useStore';
@@ -7,6 +7,20 @@ export default function Navbar() {
   const { settings } = useSettings();
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('theme') === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
 
   const links = [
     { to: '/', label: 'Home' },
@@ -14,12 +28,17 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#FFF8F0]/95 backdrop-blur border-b border-[#F5ECD8]">
+    <nav className="sticky top-0 z-50 bg-bg-main/95 backdrop-blur border-b border-border-main">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-[#5C3D1E]">
-          <img src="/icon.jpg" alt="Store Logo" className="w-8 h-8 rounded-full object-cover shadow-sm bg-white" />
-          {settings.shop_name}
-        </Link>
+        <div className="flex items-center gap-4">
+          <button onClick={() => setIsDark(!isDark)} className="p-2 rounded-full bg-bg-card-alt text-text-main hover:bg-border-main transition-colors flex-shrink-0" aria-label="Toggle Dark Mode">
+            {isDark ? '🌙' : '☀️'}
+          </button>
+          <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-text-main">
+            <img src="/icon.jpg" alt="Store Logo" className="w-8 h-8 rounded-full object-cover shadow-sm bg-bg-card" />
+            <span className="hidden sm:inline">{settings.shop_name}</span>
+          </Link>
+        </div>
 
         <div className="flex items-center gap-4">
           {/* Desktop nav */}
@@ -28,21 +47,21 @@ export default function Navbar() {
               <Link key={l.to} to={l.to}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                   location.pathname === l.to
-                    ? 'bg-[#F4A261] text-white'
-                    : 'text-[#8B5E3C] hover:bg-[#F5ECD8]'
+                    ? 'bg-brand-gold text-white'
+                    : 'text-text-muted hover:bg-bg-card-alt'
                 }`}>
                 {l.label}
               </Link>
             ))}
             <a href={`https://wa.me/${settings.whatsapp?.replace(/\D/g, '')}`}
               target="_blank" rel="noopener noreferrer"
-              className="ml-2 px-4 py-2 rounded-full bg-[#7BC67E] text-white text-sm font-semibold hover:bg-[#4A9B5F] transition-colors">
+              className="ml-2 px-4 py-2 rounded-full bg-brand-green text-white text-sm font-semibold hover:bg-brand-green-hover transition-colors">
               Contact Us
             </a>
           </div>
 
           {/* Mobile hamburger */}
-          <button className="md:hidden p-2 rounded-xl hover:bg-[#F5ECD8] transition-colors"
+          <button className="md:hidden p-2 rounded-xl hover:bg-bg-card-alt transition-colors"
             onClick={() => setOpen(!open)} aria-label="Menu">
             <div className="w-5 h-4 flex flex-col justify-between">
               <span className={`block h-0.5 bg-[#8B5E3C] transition-all ${open ? 'rotate-45 translate-y-1.5' : ''}`} />
@@ -56,19 +75,19 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }} className="md:hidden border-t border-[#F5ECD8] bg-[#FFF8F0]">
+            exit={{ opacity: 0, height: 0 }} className="md:hidden border-t border-border-main bg-bg-main">
             <div className="px-4 py-3 flex flex-col gap-1">
               {links.map(l => (
                 <Link key={l.to} to={l.to} onClick={() => setOpen(false)}
                   className={`px-4 py-2.5 rounded-xl text-sm font-semibold ${
-                    location.pathname === l.to ? 'bg-[#F4A261] text-white' : 'text-[#8B5E3C] hover:bg-[#F5ECD8]'
+                    location.pathname === l.to ? 'bg-brand-gold text-white' : 'text-text-muted hover:bg-bg-card-alt'
                   }`}>
                   {l.label}
                 </Link>
               ))}
               <a href={`https://wa.me/${settings.whatsapp?.replace(/\D/g, '')}`}
                 target="_blank" rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-xl bg-[#7BC67E] text-white text-sm font-semibold text-center mt-1">
+                className="px-4 py-2.5 rounded-xl bg-brand-green text-white text-sm font-semibold text-center mt-1">
                 Contact Us
               </a>
             </div>

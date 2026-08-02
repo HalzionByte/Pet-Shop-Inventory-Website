@@ -55,64 +55,64 @@ export default function AdminPetsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="font-display text-2xl font-bold text-[#3D2B1F]">Pets</h1>
-          <p className="text-[#8B5E3C] text-sm">{pets.length} total</p>
+          <h1 className="font-display text-2xl font-bold text-text-main">Pets</h1>
+          <p className="text-text-muted text-sm">{pets.length} total</p>
         </div>
         <button onClick={openAdd}
-          className="px-5 py-2.5 bg-[#F4A261] text-white font-bold rounded-xl hover:bg-[#E07832] transition-colors text-sm">
+          className="px-5 py-2.5 bg-brand-gold text-white font-bold rounded-xl hover:bg-brand-gold-hover transition-colors text-sm">
           + Add Pet
         </button>
       </div>
 
       <input type="text" placeholder="Search pets…" value={search} onChange={e => setSearch(e.target.value)}
-        className="mb-4 w-full max-w-xs px-4 py-2.5 rounded-xl border border-[#F5ECD8] bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50" />
+        className="mb-4 w-full max-w-xs px-4 py-2.5 rounded-xl border border-border-main bg-bg-card text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/50" />
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-[#F5ECD8] overflow-hidden">
+      <div className="bg-bg-card rounded-2xl border border-border-main overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-[#F5ECD8]">
+            <thead className="bg-bg-card-alt">
               <tr>
-                <th className="text-left px-4 py-3 text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">Pet</th>
-                <th className="text-left px-4 py-3 text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">Breed</th>
-                <th className="text-left px-4 py-3 text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">Status</th>
-                <th className="text-left px-4 py-3 text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">Featured</th>
-                <th className="text-right px-4 py-3 text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">Actions</th>
+                <th className="text-left px-4 py-3 text-xs font-bold text-text-muted uppercase tracking-wider">Pet</th>
+                <th className="text-left px-4 py-3 text-xs font-bold text-text-muted uppercase tracking-wider">Breed</th>
+                <th className="text-left px-4 py-3 text-xs font-bold text-text-muted uppercase tracking-wider">Status</th>
+                <th className="text-left px-4 py-3 text-xs font-bold text-text-muted uppercase tracking-wider">Featured</th>
+                <th className="text-right px-4 py-3 text-xs font-bold text-text-muted uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F5ECD8]">
+            <tbody className="divide-y divide-border-main">
               {filtered.map(pet => (
-                <tr key={pet.id} className="hover:bg-[#FFF8F0] transition-colors">
+                <tr key={pet.id} className="hover:bg-bg-main transition-colors">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#F5ECD8] flex-shrink-0">
+                      <div className="w-10 h-10 rounded-xl overflow-hidden bg-bg-card-alt flex-shrink-0">
                         {pet.images[0]
                           ? <img src={pet.images[0]} alt={pet.name} className="w-full h-full object-cover" />
                           : <div className="w-full h-full flex items-center justify-center">🐾</div>}
                       </div>
                       <div>
-                        <p className="font-semibold text-[#3D2B1F]">{pet.name}</p>
-                        <p className="text-xs text-[#8B5E3C]">{pet.species}</p>
+                        <p className="font-semibold text-text-main">{pet.name}</p>
+                        <p className="text-xs text-text-muted">{pet.species}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-[#5C3D1E]">{pet.breed}</td>
+                  <td className="px-4 py-3 text-text-main">{pet.breed}</td>
                   <td className="px-4 py-3">
                     <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                      pet.availability === 'available' ? 'bg-[#B8E4BA] text-[#2D6A35]' :
-                      pet.availability === 'reserved' ? 'bg-[#FFE0A0] text-[#8B5E00]' :
-                      'bg-[#FFD1D1] text-[#8B2020]'}`}>
+                      pet.availability === 'available' ? 'bg-badge-avail-bg text-badge-avail-text' :
+                      pet.availability === 'reserved' ? 'bg-badge-res-bg text-badge-res-text' :
+                      'bg-badge-sold-bg text-badge-sold-text'}`}>
                       {pet.availability}
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs font-bold ${pet.featured ? 'text-[#F4A261]' : 'text-[#C49A6C]'}`}>
+                    <span className={`text-xs font-bold ${pet.featured ? 'text-brand-gold' : 'text-text-subtle'}`}>
                       {pet.featured ? '★ Yes' : '–'}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
                     <button onClick={() => openEdit(pet)}
-                      className="px-3 py-1.5 text-xs font-semibold text-[#5C3D1E] hover:bg-[#F5ECD8] rounded-lg transition-colors mr-1">
+                      className="px-3 py-1.5 text-xs font-semibold text-text-main hover:bg-bg-card-alt rounded-lg transition-colors mr-1">
                       Edit
                     </button>
                     <button onClick={() => { if (confirm(`Delete ${pet.name}?`)) deletePet(pet.id); }}
@@ -125,7 +125,7 @@ export default function AdminPetsPage() {
             </tbody>
           </table>
           {filtered.length === 0 && (
-            <div className="text-center py-12 text-[#8B5E3C]">No pets found.</div>
+            <div className="text-center py-12 text-text-muted">No pets found.</div>
           )}
         </div>
       </div>
@@ -137,8 +137,8 @@ export default function AdminPetsPage() {
             className="fixed inset-0 z-50 bg-black/40 flex items-start justify-center p-4 overflow-y-auto">
             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-3xl p-6 w-full max-w-lg my-8 shadow-xl">
-              <h2 className="font-display text-xl font-bold text-[#3D2B1F] mb-5">
+              className="bg-bg-card rounded-3xl p-6 w-full max-w-lg my-8 shadow-xl">
+              <h2 className="font-display text-xl font-bold text-text-main mb-5">
                 {editId ? 'Edit Pet' : 'Add New Pet'}
               </h2>
 
@@ -180,14 +180,14 @@ export default function AdminPetsPage() {
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" checked={form.vaccinated}
                       onChange={e => setForm(f => ({ ...f, vaccinated: e.target.checked }))}
-                      className="w-4 h-4 accent-[#F4A261]" />
-                    <span className="text-sm font-semibold text-[#5C3D1E]">Vaccinated</span>
+                      className="w-4 h-4 accent-brand-gold" />
+                    <span className="text-sm font-semibold text-text-main">Vaccinated</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" checked={form.featured}
                       onChange={e => setForm(f => ({ ...f, featured: e.target.checked }))}
-                      className="w-4 h-4 accent-[#F4A261]" />
-                    <span className="text-sm font-semibold text-[#5C3D1E]">Featured on Home</span>
+                      className="w-4 h-4 accent-brand-gold" />
+                    <span className="text-sm font-semibold text-text-main">Featured on Home</span>
                   </label>
                 </div>
 
@@ -215,11 +215,11 @@ export default function AdminPetsPage() {
 
               <div className="flex gap-3 mt-6">
                 <button onClick={handleSave}
-                  className="flex-1 py-3 bg-[#F4A261] text-white font-bold rounded-xl hover:bg-[#E07832] transition-colors">
+                  className="flex-1 py-3 bg-brand-gold text-white font-bold rounded-xl hover:bg-brand-gold-hover transition-colors">
                   {editId ? 'Save Changes' : 'Add Pet'}
                 </button>
                 <button onClick={() => setShowForm(false)}
-                  className="px-5 py-3 border border-[#F5ECD8] text-[#8B5E3C] font-semibold rounded-xl hover:bg-[#F5ECD8] transition-colors">
+                  className="px-5 py-3 border border-border-main text-text-muted font-semibold rounded-xl hover:bg-bg-card-alt transition-colors">
                   Cancel
                 </button>
               </div>
@@ -231,12 +231,12 @@ export default function AdminPetsPage() {
   );
 }
 
-const input = 'w-full px-3 py-2.5 rounded-xl border border-[#F5ECD8] text-sm text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50 bg-white';
+const input = 'w-full px-3 py-2.5 rounded-xl border border-border-main text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-brand-gold/50 bg-bg-card';
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="text-xs font-semibold text-[#8B5E3C] uppercase tracking-wider block mb-1.5">{label}</label>
+      <label className="text-xs font-semibold text-text-muted uppercase tracking-wider block mb-1.5">{label}</label>
       {children}
     </div>
   );

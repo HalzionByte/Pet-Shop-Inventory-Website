@@ -6,18 +6,18 @@ export default function AdminDashboardPage() {
   const { carousel } = useCarousel();
 
   const stats = [
-    { label: 'Total Pets', value: pets.length, icon: '🐾', color: 'bg-[#F5ECD8]', text: 'text-[#5C3D1E]' },
-    { label: 'Available', value: pets.filter(p => p.availability === 'available').length, icon: '✅', color: 'bg-[#B8E4BA]', text: 'text-[#2D6A35]' },
-    { label: 'Reserved', value: pets.filter(p => p.availability === 'reserved').length, icon: '🟡', color: 'bg-[#FFE0A0]', text: 'text-[#8B5E00]' },
-    { label: 'Sold', value: pets.filter(p => p.availability === 'sold').length, icon: '🔴', color: 'bg-[#FFD1D1]', text: 'text-[#8B2020]' },
-    { label: 'Carousel Images', value: carousel.filter(c => c.enabled).length, icon: '🖼️', color: 'bg-[#D6F0F1]', text: 'text-[#2C6B6E]' },
+    { label: 'Total Pets', value: pets.length, icon: '🐾', color: 'bg-bg-card-alt', text: 'text-text-main' },
+    { label: 'Available', value: pets.filter(p => p.availability === 'available').length, icon: '✅', color: 'bg-badge-avail-bg', text: 'text-badge-avail-text' },
+    { label: 'Reserved', value: pets.filter(p => p.availability === 'reserved').length, icon: '🟡', color: 'bg-badge-res-bg', text: 'text-badge-res-text' },
+    { label: 'Sold', value: pets.filter(p => p.availability === 'sold').length, icon: '🔴', color: 'bg-badge-sold-bg', text: 'text-badge-sold-text' },
+    { label: 'Carousel Images', value: carousel.filter(c => c.enabled).length, icon: '🖼️', color: 'bg-brand-blue/30', text: 'text-brand-blue' },
   ];
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-display text-2xl font-bold text-[#3D2B1F]">Dashboard</h1>
-        <p className="text-[#8B5E3C] text-sm mt-1">Welcome back! Here's your shop at a glance.</p>
+        <h1 className="font-display text-2xl font-bold text-text-main">Dashboard</h1>
+        <p className="text-text-muted text-sm mt-1">Welcome back! Here's your shop at a glance.</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
@@ -33,12 +33,12 @@ export default function AdminDashboardPage() {
         ))}
       </div>
 
-      <div className="bg-white rounded-2xl p-6 border border-[#F5ECD8]">
-        <h2 className="font-display font-bold text-[#3D2B1F] mb-4">Recent Pets</h2>
+      <div className="bg-bg-card rounded-2xl p-6 border border-border-main">
+        <h2 className="font-display font-bold text-text-main mb-4">Recent Pets</h2>
         <div className="space-y-3">
           {pets.slice(-5).reverse().map(pet => (
-            <div key={pet.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#FFF8F0] transition-colors">
-              <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#F5ECD8] flex-shrink-0">
+            <div key={pet.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-bg-main transition-colors">
+              <div className="w-10 h-10 rounded-xl overflow-hidden bg-bg-card-alt flex-shrink-0">
                 {pet.images[0] ? (
                   <img src={pet.images[0]} alt={pet.name} className="w-full h-full object-cover" />
                 ) : (
@@ -46,13 +46,13 @@ export default function AdminDashboardPage() {
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-[#3D2B1F] text-sm truncate">{pet.name}</p>
-                <p className="text-xs text-[#8B5E3C]">{pet.species} · {pet.breed}</p>
+                <p className="font-semibold text-text-main text-sm truncate">{pet.name}</p>
+                <p className="text-xs text-text-muted">{pet.species} · {pet.breed}</p>
               </div>
               <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                pet.availability === 'available' ? 'bg-[#B8E4BA] text-[#2D6A35]' :
-                pet.availability === 'reserved' ? 'bg-[#FFE0A0] text-[#8B5E00]' :
-                'bg-[#FFD1D1] text-[#8B2020]'
+                pet.availability === 'available' ? 'bg-badge-avail-bg text-badge-avail-text' :
+                pet.availability === 'reserved' ? 'bg-badge-res-bg text-badge-res-text' :
+                'bg-badge-sold-bg text-badge-sold-text'
               }`}>{pet.availability}</span>
             </div>
           ))}

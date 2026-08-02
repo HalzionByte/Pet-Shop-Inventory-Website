@@ -21,30 +21,30 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5ECD8] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-bg-card-alt flex items-center justify-center px-4">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-sm bg-white rounded-3xl shadow-lg p-8">
+        className="w-full max-w-sm bg-bg-card rounded-3xl shadow-lg p-8">
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🐾</div>
-          <h1 className="font-display text-2xl font-bold text-[#3D2B1F]">Admin Panel</h1>
-          <p className="text-[#8B5E3C] text-sm mt-1">Sign in to manage your pet shop</p>
+          <h1 className="font-display text-2xl font-bold text-text-main">Admin Panel</h1>
+          <p className="text-text-muted text-sm mt-1">Sign in to manage your pet shop</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="text-xs font-semibold text-[#8B5E3C] uppercase tracking-wider block mb-1.5">
+            <label className="text-xs font-semibold text-text-muted uppercase tracking-wider block mb-1.5">
               Username
             </label>
             <input type="text" value={username} onChange={e => setUsername(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-[#F5ECD8] text-sm text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50"
+              className="w-full px-4 py-3 rounded-xl border border-border-main text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
               placeholder="admin" required />
           </div>
           <div>
-            <label className="text-xs font-semibold text-[#8B5E3C] uppercase tracking-wider block mb-1.5">
+            <label className="text-xs font-semibold text-text-muted uppercase tracking-wider block mb-1.5">
               Password
             </label>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-[#F5ECD8] text-sm text-[#3D2B1F] focus:outline-none focus:ring-2 focus:ring-[#F4A261]/50"
+              className="w-full px-4 py-3 rounded-xl border border-border-main text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
               placeholder="••••••••" required />
           </div>
 
@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
           )}
 
           <button type="submit"
-            className="py-3 bg-[#F4A261] text-white font-bold rounded-xl hover:bg-[#E07832] transition-colors">
+            className="py-3 bg-brand-gold text-white font-bold rounded-xl hover:bg-brand-gold-hover transition-colors">
             Sign In
           </button>
         </form>
