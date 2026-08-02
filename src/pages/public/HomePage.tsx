@@ -24,7 +24,7 @@ export default function HomePage() {
 
       {/* Featured Pets */}
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
+        <motion.div initial="hidden" animate="show"
           variants={{ show: { transition: { staggerChildren: 0.08 } } }}>
           <motion.div variants={fadeUp} className="mb-10 text-center">
             <h2 className="mb-2 font-display text-3xl font-bold text-[#5C3D1E] md:text-4xl">
@@ -57,7 +57,7 @@ export default function HomePage() {
       {/* Categories */}
       <section className="bg-[#FDF3E7] py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
+          <motion.div initial="hidden" animate="show"
             variants={{ show: { transition: { staggerChildren: 0.06 } } }}>
             <motion.div variants={fadeUp} className="mb-10 text-center">
               <h2 className="mb-2 font-display text-3xl font-bold text-[#5C3D1E] md:text-4xl">Browse by Category</h2>
