@@ -212,12 +212,12 @@ export const seedCarousel: CarouselImage[] = [
 ];
 
 export const seedSettings: SiteSettings = {
-  shop_name: 'Pisind Pet Store',
+  shop_name: 'Pawsome Pet Shop',
   logo: '🐾',
   address: '123 Blossom Lane, Maplewood, CA 90210',
   business_hours: 'Mon–Sat: 9am–7pm | Sun: 10am–5pm',
   whatsapp: '+15551234567',
   instagram: 'https://instagram.com/pawsomepetshop',
   facebook: 'https://facebook.com/pawsomepetshop',
-  footer_text: '© 2024 Pisind Pet Store. Made with ❤️ for animals and their humans.',
+  footer_text: '© 2024 Pawsome Pet Shop. Made with ❤️ for animals and their humans.',
 };
