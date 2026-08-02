@@ -1,0 +1,10 @@
+{
+  "description": "Showcases a local pet shop's available pets with warm, inviting design and easy admin management to attract customers via WhatsApp and Instagram.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

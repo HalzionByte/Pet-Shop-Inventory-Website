@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Nunito:wght@400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #FFF8F0;
+  --color-cream-dark: #F5ECD8;
+  --color-brown: #8B5E3C;
+  --color-brown-light: #C49A6C;
+  --color-brown-dark: #5C3D1E;
+  --color-green: #7BC67E;
+  --color-green-light: #B8E4BA;
+  --color-green-dark: #4A9B5F;
+  --color-orange: #F4A261;
+  --color-orange-light: #FDDCB8;
+  --color-orange-dark: #E07832;
+  --color-blue: #A8DADC;
+  --color-blue-light: #D6F0F1;
+  --color-pink: #FFB5C8;
+  --color-pink-light: #FFE0E9;
+  --color-yellow: #FFD166;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C49A6C transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #FFF8F0;
+  color: #3D2B1F;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Hide scrollbar until hovered */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #C49A6C; border-radius: 99px; }
