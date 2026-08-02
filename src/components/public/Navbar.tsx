@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-[#FFF8F0]/95 backdrop-blur border-b border-[#F5ECD8]">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-[#5C3D1E]">
-          <span className="text-2xl">{settings.logo || '🐾'}</span>
+          <img src="/icon.jpg" alt="Store Logo" className="w-8 h-8 rounded-full object-cover shadow-sm bg-white" />
           {settings.shop_name}
         </Link>
 
@@ -40,8 +40,6 @@ export default function Navbar() {
               Contact Us
             </a>
           </div>
-
-          <img src="/icon.jpg" alt="Store Icon" className="w-10 h-10 rounded-full object-cover shadow-sm bg-white" />
 
           {/* Mobile hamburger */}
           <button className="md:hidden p-2 rounded-xl hover:bg-[#F5ECD8] transition-colors"
