@@ -1,6 +1,17 @@
 import { motion } from 'framer-motion';
 import { usePets, useCarousel } from '../../hooks/useStore';
 
+function PetImagePreview({ src, alt }: { src?: string; alt: string }) {
+  const [errored, setErrored] = useState(false);
+  const safeSrc = src?.trim();
+
+  if (!safeSrc || errored) {
+    return <div className="flex h-full w-full items-center justify-center text-2xl">🐾</div>;
+  }
+
+  return <img src={safeSrc} alt={alt} className="h-full w-full object-cover" onError={() => setErrored(true)} />;
+}
+
 export default function AdminDashboardPage() {
   const { pets } = usePets();
   const { carousel } = useCarousel();
@@ -39,11 +50,7 @@ export default function AdminDashboardPage() {
           {pets.slice(-5).reverse().map(pet => (
             <div key={pet.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-bg-main transition-colors">
               <div className="w-10 h-10 rounded-xl overflow-hidden bg-bg-card-alt flex-shrink-0">
-                {pet.images[0] ? (
-                  <img src={pet.images[0]} alt={pet.name} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-lg">🐾</div>
-                )}
+                <PetImagePreview src={pet.images[0]} alt={pet.name} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-text-main text-sm truncate">{pet.name}</p>

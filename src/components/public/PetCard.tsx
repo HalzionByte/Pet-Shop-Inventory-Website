@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { Pet, Category } from '../../types';
@@ -14,6 +15,21 @@ const availabilityConfig = {
   sold: { label: 'Sold', bg: 'bg-badge-sold-bg', text: 'text-badge-sold-text' },
 };
 
+function PetImage({ src, alt, className }: { src?: string; alt: string; className?: string }) {
+  const [errored, setErrored] = useState(false);
+  const safeSrc = src?.trim();
+
+  if (!safeSrc || errored) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-[#FDF3E7] text-5xl">
+        🐾
+      </div>
+    );
+  }
+
+  return <img src={safeSrc} alt={alt} className={className} onError={() => setErrored(true)} />;
+}
+
 export default function PetCard({ pet, categories }: Props) {
   const { settings } = useSettings();
   const avail = availabilityConfig[pet.availability];
@@ -27,12 +43,11 @@ export default function PetCard({ pet, categories }: Props) {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className="bg-bg-card rounded-3xl overflow-hidden shadow-md border border-border-main flex flex-col">
       <div className="relative overflow-hidden h-52 bg-bg-card-alt">
-        {pet.images[0] ? (
-          <img src={pet.images[0]} alt={pet.name}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-5xl">🐾</div>
-        )}
+        <PetImage
+          src={pet.images[0]}
+          alt={pet.name}
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        />
         <div className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold ${avail.bg} ${avail.text}`}>
           {avail.label}
         </div>

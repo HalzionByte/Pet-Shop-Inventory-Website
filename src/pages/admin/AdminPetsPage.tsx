@@ -9,6 +9,17 @@ const BLANK: Omit<Pet, 'id' | 'created_at' | 'updated_at'> = {
   availability: 'available', featured: false, description: '', category_id: '', images: [],
 };
 
+function PetImagePreview({ src, alt }: { src?: string; alt: string }) {
+  const [errored, setErrored] = useState(false);
+  const safeSrc = src?.trim();
+
+  if (!safeSrc || errored) {
+    return <div className="flex h-full w-full items-center justify-center text-xl">🐾</div>;
+  }
+
+  return <img src={safeSrc} alt={alt} className="h-full w-full object-cover" onError={() => setErrored(true)} />;
+}
+
 export default function AdminPetsPage() {
   const { pets, addPet, updatePet, deletePet } = usePets();
   const { categories } = useCategories();
@@ -86,9 +97,7 @@ export default function AdminPetsPage() {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl overflow-hidden bg-bg-card-alt flex-shrink-0">
-                        {pet.images[0]
-                          ? <img src={pet.images[0]} alt={pet.name} className="w-full h-full object-cover" />
-                          : <div className="w-full h-full flex items-center justify-center">🐾</div>}
+                        <PetImagePreview src={pet.images[0]} alt={pet.name} />
                       </div>
                       <div>
                         <p className="font-semibold text-text-main">{pet.name}</p>
